@@ -102,6 +102,7 @@ setup_airflow() {
 
     # Install Airflow using Helm
     helm install airflow apache-airflow/airflow \
+        --values airflow-values.yaml \
         --namespace airflow \
         --set executor=CeleryExecutor \
         --set webserver.defaultUser.enabled=true \

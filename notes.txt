@@ -1,0 +1,26 @@
+
+
+
+
+
+
+`airflow_manager.sh`
+
+I want your help in developing a bash script for macos which deploys airflow with helm charts running on local host.
+this script will be called `airflow_manager.sh`. i want a function in the bash script `setup` that does all
+dependency installation, airflow setup, and anything else to get running with port forwarding to local host. 
+then i want another function `run` which almost does the same thing as `setup`, but it skips dependency setup. 
+i essentially want to use this in cases where i've done `setup`, then shut things down but didn't destroy any resources,
+and i just want to again get local host access. then i want a `shutdown` function which turns things off but doesn't fully
+destroy resources. then i want a `teardown` function which does normal shutdown and also destroys all running resources
+such that it looks like nothing was ever running.
+
+below are some principles to follow while developing this code:
+- install dependencies with proper version checks and checks if already installed
+- ensure robust error handling to check for errors after each command execution
+- ensure idempotency so that there are no conflicts or leftover resources after running any functions in any order
+- handle graceful shutdowns, particularly related to ports
+- cleanup all resources in the teardown process
+- wait for readiness in pods and other necessary infra before proceeding to next steps
+- ensure proper and detailed logging
+- be careful with handling port availability

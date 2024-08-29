@@ -1,0 +1,15 @@
+dags:
+  gitSync:
+    enabled: false
+  persistence:
+    enabled: true
+    accessMode: ReadOnlyMany
+    storageClass: hostpath  # Use the appropriate storage class for your setup
+    size: 1Gi
+    existingClaim: ""
+    subPath: ""
+  path: /opt/airflow/dags
+  volume:
+    hostPath:
+      path: /airflow/dags
+      type: Directory
